@@ -1,23 +1,27 @@
-
-
 apply plugin: 'com.android.application'
-
-
-
 android {
-    compileSdkVersion 8
-    buildToolsVersion "19.1.0"
-
-    defaultConfig {
-        applicationId "any.copy.io.basic"
-        minSdkVersion 8
-        targetSdkVersion 8
+    signingConfigs {
+        release_sign {
+            keyAlias 'tonyaliastang'
+            keyPassword 'tonykeytang'
+            storeFile file('tony_thompson_key_store.jks')
+            storePassword 'tonykeytang'
+        }
     }
-
+    compileSdkVersion 24
+    buildToolsVersion "24.0.2"
+    defaultConfig {
+        applicationId "com.tony.backup.demo"
+        minSdkVersion 17
+        targetSdkVersion 22
+    }
     buildTypes {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
+            signingConfig signingConfigs.release_sign
         }
     }
+}
+dependencies {
 }

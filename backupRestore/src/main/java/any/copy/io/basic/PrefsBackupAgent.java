@@ -1,4 +1,4 @@
-package any.copy.io.basic;
+package com.tony.backup.demo;
 
 import android.app.backup.BackupAgentHelper;
 import android.app.backup.SharedPreferencesBackupHelper;
@@ -8,7 +8,7 @@ public class PrefsBackupAgent extends BackupAgentHelper {
 
     @Override
     public void onCreate() {
-        SharedPreferencesBackupHelper helper = new SharedPreferencesBackupHelper(this, any.copy.io.basic.BackupRestoreActivity.PREFS);
+        SharedPreferencesBackupHelper helper = new SharedPreferencesBackupHelper(this, com.tony.backup.demo.BackupRestoreActivity.PREFS);
         addHelper(PREFS_BACKUP_KEY, helper);
     }
 }

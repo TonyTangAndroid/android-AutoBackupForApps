@@ -1,4 +1,4 @@
-package any.copy.io.basic;
+package com.tony.backup.demo;
 
 import android.app.backup.BackupAgent;
 import android.app.backup.BackupDataInput;
@@ -21,10 +21,10 @@ public class SaBackupAgent extends BackupAgent {
     @Override
     public void onBackup(ParcelFileDescriptor oldState, BackupDataOutput data,
                          ParcelFileDescriptor newState) throws IOException {
-        Log.d(any.copy.io.basic.BackupRestoreActivity.TAG, "onBackup");
-        SharedPreferences sp = getSharedPreferences(any.copy.io.basic.BackupRestoreActivity.PREFS, MODE_PRIVATE);
-        if (sp.contains(any.copy.io.basic.BackupRestoreActivity.KEY)) {
-            String val = sp.getString(any.copy.io.basic.BackupRestoreActivity.KEY, null);
+        Log.d(com.tony.backup.demo.BackupRestoreActivity.TAG, "onBackup");
+        SharedPreferences sp = getSharedPreferences(com.tony.backup.demo.BackupRestoreActivity.PREFS, MODE_PRIVATE);
+        if (sp.contains(com.tony.backup.demo.BackupRestoreActivity.KEY)) {
+            String val = sp.getString(com.tony.backup.demo.BackupRestoreActivity.KEY, null);
             String oldVal = null;
             if (val != null) {
                 FileInputStream fis = new FileInputStream(oldState.getFileDescriptor());
@@ -57,7 +57,7 @@ public class SaBackupAgent extends BackupAgent {
     @Override
     public void onRestore(BackupDataInput data, int appVersionCode,
                           ParcelFileDescriptor newState) throws IOException {
-        Log.d(any.copy.io.basic.BackupRestoreActivity.TAG, "onRestore");
+        Log.d(com.tony.backup.demo.BackupRestoreActivity.TAG, "onRestore");
         String val = null;
         while (data.readNextHeader()) {
             String key = data.getKey();
@@ -76,9 +76,9 @@ public class SaBackupAgent extends BackupAgent {
         }
         if (val != null) {
             writeNewState(val, newState);
-            SharedPreferences sp = getSharedPreferences(any.copy.io.basic.BackupRestoreActivity.PREFS, MODE_PRIVATE);
+            SharedPreferences sp = getSharedPreferences(com.tony.backup.demo.BackupRestoreActivity.PREFS, MODE_PRIVATE);
             SharedPreferences.Editor editor = sp.edit();
-            editor.putString(any.copy.io.basic.BackupRestoreActivity.KEY, val);
+            editor.putString(com.tony.backup.demo.BackupRestoreActivity.KEY, val);
             editor.commit();
         }
     }
