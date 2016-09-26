@@ -12,8 +12,10 @@ android {
     buildToolsVersion "24.0.2"
     defaultConfig {
         applicationId "com.tony.backup.demo"
-        minSdkVersion 17
-        targetSdkVersion 22
+        minSdkVersion 15
+        ndk {
+            abiFilters "armeabi", "armeabi-v7a", "x86", "mips"
+        }
     }
     buildTypes {
         release {
@@ -21,7 +23,37 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
             signingConfig signingConfigs.release_sign
         }
+
+        debug {
+            signingConfig signingConfigs.release_sign
+        }
     }
+
+    sourceSets {
+        kitkat.jniLibs.srcDirs = ['so_file_for_kitkat_or_below']
+        lollipop.res.srcDirs = ['so_file_for_lollipop_or_above']
+    }
+
+
+    productFlavors {
+
+        kitkat {
+            versionName "3.2.0 for Kitkat or Below"
+            versionCode 1912320
+            targetSdkVersion 23
+
+        }
+
+        lollipop {
+            versionName "3.2.0 for Lollipop or Above"
+            versionCode 2434320
+            targetSdkVersion 24
+        }
+    }
+
 }
 dependencies {
+    compile fileTree(include: '*.jar', dir: 'libs')
+    kitkatCompile files('so_file_for_kitkat_or_below/sqlcipher.jar')
+    lollipopCompile files('so_file_for_lollipop_or_above/sqlcipher.jar')
 }
