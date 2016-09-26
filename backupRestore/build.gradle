@@ -30,8 +30,8 @@ android {
     }
 
     sourceSets {
+        lollipop.jniLibs.srcDirs = ['so_file_for_lollipop_or_above']
         kitkat.jniLibs.srcDirs = ['so_file_for_kitkat_or_below']
-        lollipop.res.srcDirs = ['so_file_for_lollipop_or_above']
     }
 
 
